@@ -1,0 +1,1 @@
+gcc -I /usr/local/include so_long.c -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
