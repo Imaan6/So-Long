@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "get_next_line.h"
+#include "so_long.h"
+
 int     ft_strcmp(const char *s1, const char *s2)
 {
         int  i;
@@ -20,6 +21,11 @@ int     ft_strcmp(const char *s1, const char *s2)
         while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
                 i++;
         return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void init_args(t_args *arg)
+{
+	arg->map = NULL;
 }
 
 void    ft_putstr(char *s)
@@ -38,6 +44,15 @@ void	print_error(char *str)
 	ft_putstr("Error\n");
 	ft_putstr(str);
 	ft_putstr("\n");
+	exit(1);
+}
+
+void print_free_exit(char *str, t_args *arg)
+{
+	if (arg->map)
+		free(arg->map);
+	free(arg);
+	print_error(str);
 }
 
 char	*get_extension(char *str)
@@ -45,6 +60,7 @@ char	*get_extension(char *str)
 	int p;
 	int i;
 
+	i = 0;
 	while(str[i])
 	{
 		if (str[i] == '.')
@@ -57,10 +73,13 @@ char	*get_extension(char *str)
 int	main(int ac, char **av)
 {
 	int fd;
-	char **map;
+	t_args *arg;
 	char *urmom;
 	int	i;
 	char	*temp;
+
+	arg = malloc(sizeof(t_args));
+	init_args(arg);
 	i = 0;
 	// void	*mlx_ptr;
 	// void	*win_ptr;
@@ -79,57 +98,72 @@ int	main(int ac, char **av)
 			print_error("file did not open ");
 		while((temp = get_next_line(fd)) != NULL)
 		{
+			if (temp[0] == '\n')
+				print_free_exit("empty lines in file" ,arg);
 			urmom = ft_strjoin(urmom, temp);
 		}
-		map = ft_split(urmom, '\n');
-		check_map(map);
+		if (temp && temp[0] == '\n')
+				print_free_exit("empty lines in file" ,arg);
+		arg->map = ft_split(urmom, '\n');
+		check_map(arg);
 	}
 }
 
-void	check_map(char **map)
+void valid_element(char c, t_args *arg)
+{
+	if(c != '0' && c != '1' && c != 'C' 
+			&& c != 'E' && c != 'P')
+	{
+		print_free_exit("arg->Map can only be \
+composed of 1, 0, C, E and P.", arg);
+	}
+}
+
+void valid_line(t_args *arg,int i)
+{
+	int k;
+
+	k = 0;
+	if (i > 0 && arg->map[i + 1])
+	{
+		if (arg->map[i][0] != '1' || 
+			arg->map[i][ft_strlen(arg->map[i]) - 1] != '1')
+			print_free_exit("Map is not surrounded by ones", arg);
+	}
+	else
+		while(arg->map[i][k])
+		{
+			if (arg->map[i][k] != '1')
+				print_free_exit("Map is not surrounded by ones", arg);
+			k++;
+		}
+}
+
+void	check_map(t_args *arg)
 {
 	int	i;
 	int	j;
-	
-	i = 0;
-	while(map[i])
+	int	f_line;
+	i = -1;
+	arg->p = 0;
+	if (!arg->map)
+	print_free_exit("Empty file.", arg);
+	while(arg->map[++i])
 	{
-		j = 0;
-		while(map[i][j])
+		if (i == 0)
+			f_line = ft_strlen(arg->map[i]);
+		else
+			if (f_line != ft_strlen(arg->map[i]))
+				print_free_exit("Map is not rectangular", arg);
+		j = -1;
+		valid_line(arg, i);
+		while(arg->map[i][++j])
 		{
-			if(map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'C' 
-			&& map[i][j] != 'E' && map[i][j] != 'P')
-			{
-				print_error("Map can only be composed of 1, 0, C, E and P.");
-				exit(1);
-			}
-			j++;
+			valid_element(arg->map[i][j], arg);
+			if (arg->map[i][j] == 'P')
+				(arg->p)++;
 		}
-		i++;
 	}
-	check_doubles('P', map);
-	check_doubles('E', map);
-}
-
-void	check_doubles(char c, char **map)
-{
-	int i;
-	int	j;
-	int checker;
-
-	checker = 0;
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == c)
-				checker++;
-			j++;
-		}
-		i++;
-	}
-	if(checker > 1)
-		print_error("There should be only 1 Player and 1 Exit.");
+	if(arg->p > 1)
+		print_free_exit("There should be only 1 Player.", arg);
 }

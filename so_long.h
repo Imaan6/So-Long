@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
+
 # define BUFFER_SIZE 1024
 
 typedef struct coord
@@ -27,8 +28,12 @@ typedef struct coord
     int nbr_c;
     int x_e;
     int y_e;
-
-}t_args; 
+    int p;
+    void	*mlx_ptr;
+	void	*win_ptr;
+    char    **map;
+    
+}   t_args; 
 
 char	*get_next_line(int fd);
 char	*ft_substr(char const *s, unsigned int start, int len);
@@ -36,7 +41,6 @@ int		ft_strlen(char *s);
 int		check_newline(char *buffer);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char const *s, char c);
-void	check_map(char **map);
-void	check_doubles(char c, char **map);
+void	check_map(t_args *arg);
 
 #endif
