@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:25:44 by iel-moha          #+#    #+#             */
-/*   Updated: 2021/12/23 09:24:30 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 01:07:39 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,3 @@ char	*get_next_line(int fd)
 	saved = before_line(saved);
 	return (line);
 }
-// int main()
-// {
-//     int fd = open("map.ber", O_RDONLY);
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-//     printf("%s", get_next_line(fd));
-
-//     //printf("%s", b);
-
-//     printf("%s", get_next_line(fd));
-//      //printf("%s", get_next_line(fd));
-//      //printf("%s", get_next_line(fd));
-//      close(fd);
-//      //system("leaks a.out");
-// }
