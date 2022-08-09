@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:20:51 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 08:55:58 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:01:12 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# define BUFFER_SIZE 1024
 
 typedef struct var
 {
@@ -32,6 +33,7 @@ typedef struct var
 	char    **map;
     int     d;
 	int		p;
+	int		c;
 	int		i;
 	int 	j;
 	int		px;
@@ -39,8 +41,6 @@ typedef struct var
 	int 	is_ver;
 	int		is_hor;
 }	t_var;
-
-# define BUFFER_SIZE 1024
 
 void	print_error(char *str);
 void    ft_putstr(char *s);
@@ -54,5 +54,6 @@ char	*get_extension(char *str);
 char	**ft_split(char const *s, char c);
 void	print_free_exit(char *str, t_var *var);
 void	check_map(t_var *var);
+void	exit_plan(t_var *var);
 
 # endif

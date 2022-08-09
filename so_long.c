@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:32:01 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 09:03:22 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:21:16 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	read_map(t_var *var, char **av)
 {
+		var->tab = NULL;
 		var->fd = open(av[1], O_RDONLY);
 		if(var->fd == -1)
 			print_error("file did not open ");
@@ -22,6 +23,7 @@ void	read_map(t_var *var, char **av)
 			if (var->temp[0] == '\n')
 				print_free_exit("empty lines in file" ,var);
 			var->tab = ft_strjoin(var->tab, var->temp);
+			free(var->temp);
 		}
 		if (var->temp && var->temp[0] == '\n')
 				print_free_exit("empty lines in file" , var);
@@ -67,15 +69,34 @@ void	rendering_map(t_var *var)
 
 void	move_it(t_var *var)
 {
-	if(var->map[var->py + var->is_ver][var->px + var->is_hor] == '0')
+	printf("%d \n", var->c);
+	if(var->map[var->py + var->is_ver][var->px + var->is_hor] == '0' ||
+	 var->map[var->py + var->is_ver][var->px + var->is_hor] == 'C')
 	{
-		printf("%d \n",var->px);
+		if(var->map[var->py + var->is_ver][var->px + var->is_hor] == 'C')
+			(var->c)--;
 		var->map[var->py][var->px] = '0';
 		var->py += var->is_ver;
 		var->px += var->is_hor;
 		var->map[var->py][var->px] = 'P';
 		rendering_map(var);
 	}
+	else if(var->map[var->py + var->is_ver][var->px + var->is_hor] == 'E' && var->c == 0)
+	{
+		var->map[var->py][var->px] = '0';
+		var->py += var->is_ver;
+		var->px += var->is_hor;
+		var->map[var->py][var->px] = 'P';
+		rendering_map(var);
+		exit_plan(var);
+	}
+}
+
+void exit_plan(t_var *var)
+{
+	mlx_destroy_window(var->mlx, var->mlx_window);
+	free(var);
+	exit(1);
 }
 
 int	actions(int key, void *var2)
@@ -84,8 +105,8 @@ int	actions(int key, void *var2)
 	
 	var->is_hor = 0;
 	var->is_ver = 0;
-	// if (key == 53)
-    //     exitplan(var->p);
+	if (key == 53)
+        exit_plan(var);
     if (key == 13 || key == 126)
 		var->is_ver = -1;
 	else if (key == 1 || key == 125)
@@ -94,13 +115,7 @@ int	actions(int key, void *var2)
 		var->is_hor = 1;
 	else if (key == 0 || key == 123)
 		var->is_hor = -1;
-//     else if (key == 1 || key == 125)
-//         move_down(var);
-//     else if (key == 2 || key == 124)
-//         move_right(var);
-//     else if (key == 0 || key == 123)
-//         move_left(var);
-	 move_it(var);
+	move_it(var);
 	return 0;
 }
 
@@ -125,6 +140,5 @@ int main(int ac, char **av)
 		// printf("%d \n", var->py);
 		mlx_key_hook(var->mlx_window, actions, (void *)var);
 		mlx_loop(var->mlx);
-}
 	}
-	
+}

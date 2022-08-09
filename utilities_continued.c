@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 03:33:02 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 08:51:29 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:24:52 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	check_map(t_var *var)
 	int	f_line;
 	i = -1;
 	var->p = 0;
+	var->c = 0;
 	if (!var->map)
 	print_free_exit("Empty file.", var);
 	while(var->map[++i])
@@ -69,6 +70,8 @@ void	check_map(t_var *var)
                 var->px= j;
                 var->py = i;
             }
+			else if(var->map[i][j] == 'C')
+				(var->c)++;
 		}
 	}
 	if(var->p > 1)
