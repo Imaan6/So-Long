@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:54:00 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 00:32:05 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 03:32:03 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ char	*get_extension(char *str)
 		i++;
 	}
 	return (str + p);
+}
+
+void print_free_exit(char *str, t_var *var)
+{
+	if (var->map)
+		free(var->map);
+	free(var);
+	print_error(str);
 }

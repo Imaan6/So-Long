@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:12:34 by iel-moha          #+#    #+#             */
-/*   Updated: 2021/11/24 22:42:00 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 04:02:25 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,3 @@ char	**ft_split(char const *s, char c)
 	new[j] = NULL;
 	return (new);
 }
-/*
-int    main(void)
-{
-	int i = 0;	char p[] = "sadasdas + dsadas d + dsad  ";
-	char **tab = ft_split("olol					 ", ' ');
-	while (tab[i])
-	{
-		printf("|%s|\n", tab[i]);
-		i++;
-	}
-	printf("|%s|\n", tab[i]);
-	return (0);
-}*/

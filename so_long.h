@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:20:51 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 01:49:13 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 05:34:42 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ typedef struct var
     int     y;
 	int 	fd;
 	char 	*tab;
-	int		i;
 	char	*temp;
 	char    **map;
     int     d;
+	int		p;
+	int		i;
+	int 	j;
+	int		px;
+	int		py;
 }	t_var;
 
 # define BUFFER_SIZE 1024
@@ -46,5 +50,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 char	*get_extension(char *str);
 char	**ft_split(char const *s, char c);
+void	print_free_exit(char *str, t_var *var);
+void	check_map(t_var *var);
 
 # endif
