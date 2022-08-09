@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:32:01 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 05:40:36 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:03:22 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,44 @@ void	rendering_map(t_var *var)
 	}
 }
 
-// void	*actions(int key, t_var *var)
-// {
-// 	// if (key == 53)
-//     //     exitplan(var->p);
-//     if (key == 13 || key == 126)
-//         move_up(var);
+void	move_it(t_var *var)
+{
+	if(var->map[var->py + var->is_ver][var->px + var->is_hor] == '0')
+	{
+		printf("%d \n",var->px);
+		var->map[var->py][var->px] = '0';
+		var->py += var->is_ver;
+		var->px += var->is_hor;
+		var->map[var->py][var->px] = 'P';
+		rendering_map(var);
+	}
+}
+
+int	actions(int key, void *var2)
+{
+	t_var *var = (t_var *)var2;
+	
+	var->is_hor = 0;
+	var->is_ver = 0;
+	// if (key == 53)
+    //     exitplan(var->p);
+    if (key == 13 || key == 126)
+		var->is_ver = -1;
+	else if (key == 1 || key == 125)
+		var->is_ver = 1;
+	else if (key == 2 || key == 124)
+		var->is_hor = 1;
+	else if (key == 0 || key == 123)
+		var->is_hor = -1;
 //     else if (key == 1 || key == 125)
 //         move_down(var);
 //     else if (key == 2 || key == 124)
 //         move_right(var);
 //     else if (key == 0 || key == 123)
 //         move_left(var);
-// }
-
-// void	move_up(t_var *var)
-// {
-// 	if(var->map[var->px][(var->py)--] == '0')
-		
-// }
+	 move_it(var);
+	return 0;
+}
 
 int main(int ac, char **av)
 {
@@ -97,11 +116,15 @@ int main(int ac, char **av)
 	{
 		read_map(var, av);
 		var->d = 60;
-		
+
 		var->mlx = mlx_init();
-		var->mlx_window = mlx_new_window(var->mlx, 1000, 1000, "BANANIA");
+		var->mlx_window = mlx_new_window(var->mlx, 950, 420, "BANANIA");
+
 		rendering_map(var);
-		//mlx_key_hook(var->mlx_window, actions, &var);
-	}
-	mlx_loop(var->mlx);
+		// printf("%d \n", var->px);
+		// printf("%d \n", var->py);
+		mlx_key_hook(var->mlx_window, actions, (void *)var);
+		mlx_loop(var->mlx);
 }
+	}
+	

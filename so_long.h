@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:20:51 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 05:34:42 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 08:55:58 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct var
 	int 	j;
 	int		px;
 	int		py;
+	int 	is_ver;
+	int		is_hor;
 }	t_var;
 
 # define BUFFER_SIZE 1024

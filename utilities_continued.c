@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 03:33:02 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 05:35:43 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/09 08:51:29 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_map(t_var *var)
 			if (var->map[i][j] == 'P')
             {
 				(var->p)++;
-                var->px = j;
+                var->px= j;
                 var->py = i;
             }
 		}
