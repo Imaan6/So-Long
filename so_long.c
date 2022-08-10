@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:32:01 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 23:21:16 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:51:43 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	move_it(t_var *var)
 	}
 }
 
-void exit_plan(t_var *var)
+int exit_plan(t_var *var)
 {
 	mlx_destroy_window(var->mlx, var->mlx_window);
 	free(var);
@@ -119,6 +119,16 @@ int	actions(int key, void *var2)
 	return 0;
 }
 
+int	ft_width(char **s)
+{
+	int i;
+
+	i = 0;
+	while(s[i])
+		i++;
+	return(i);
+}
+
 int main(int ac, char **av)
 {
 	t_var *var;
@@ -133,12 +143,10 @@ int main(int ac, char **av)
 		var->d = 60;
 
 		var->mlx = mlx_init();
-		var->mlx_window = mlx_new_window(var->mlx, 950, 420, "BANANIA");
-
+		var->mlx_window = mlx_new_window(var->mlx, ft_strlen(var->map[0]) * 60, ft_width(var->map) * 60, "BANANIA");
 		rendering_map(var);
-		// printf("%d \n", var->px);
-		// printf("%d \n", var->py);
 		mlx_key_hook(var->mlx_window, actions, (void *)var);
+		mlx_hook(var->mlx_window, 17, 1L<<2, exit_plan, (void*)var);
 		mlx_loop(var->mlx);
 	}
 }

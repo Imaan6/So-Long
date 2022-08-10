@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:20:51 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 23:01:12 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:50:59 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct var
 	int		c;
 	int		i;
 	int 	j;
+	int		e;
 	int		px;
 	int		py;
 	int 	is_ver;
@@ -54,6 +55,6 @@ char	*get_extension(char *str);
 char	**ft_split(char const *s, char c);
 void	print_free_exit(char *str, t_var *var);
 void	check_map(t_var *var);
-void	exit_plan(t_var *var);
+int		exit_plan(t_var *var);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 03:33:02 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 23:24:52 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:49:31 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	check_map(t_var *var)
 	i = -1;
 	var->p = 0;
 	var->c = 0;
+	var->e = 0;
 	if (!var->map)
 	print_free_exit("Empty file.", var);
 	while(var->map[++i])
@@ -72,8 +73,12 @@ void	check_map(t_var *var)
             }
 			else if(var->map[i][j] == 'C')
 				(var->c)++;
+			else if (var->map[i][j] == 'E')
+				(var->e)++;
 		}
 	}
-	if(var->p > 1)
-		print_free_exit("There should be only 1 Player.", var);
+	if (var->p > 1 || var->e > 1)
+		print_free_exit("There should be only 1 Player and 1 Exit", var);
+	else if (var->p < 1 || var->c < 1 || var->e <1)
+		print_free_exit("There should be at least 1 Player, 1 Exit and 1 Collectible", var);
 }
