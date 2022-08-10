@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:32:01 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/10 23:51:43 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 00:05:50 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,20 @@ void	rendering_map(t_var *var)
 			else if (var->map[var->i][var->j] == 'P' || var->map[var->i][var->j] == 'C')
 			{
 				var->img = mlx_xpm_file_to_image(var->mlx, "Images/Floor.xpm", &var->d, &var->d);
+				if(var->img == 0)
+					print_free_exit("invalid image file", var);
 				mlx_put_image_to_window(var->mlx, var->mlx_window, var->img, var->x, var->y);
 				if(var->map[var->i][var->j] == 'C')
 					var->img = mlx_xpm_file_to_image(var->mlx, "Images/Garbage.xpm", &var->d, &var->d);
 				else if(var->map[var->i][var->j] == 'P')
 				var->img = mlx_xpm_file_to_image(var->mlx, "Images/Banania.xpm", &var->d, &var->d);
 			}
+			if(var->img == 0)
+				print_free_exit("invalid image file", var);
 			mlx_put_image_to_window(var->mlx, var->mlx_window, var->img, var->x, var->y);
 			var->x += 60;
 			var->j++;
+			mlx_destroy_image(var->mlx, var->img);
 		}
 		var->y += 60;
 		var->i++;
