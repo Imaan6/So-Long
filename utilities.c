@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:54:00 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/09 03:32:03 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:41:06 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ void	print_error(char *str)
 	ft_putstr("\n");
 	//system("leaks a.out");
 	exit(1);
-}
-
-void    ft_putstr(char *s)
-{
-    int	i;
-
-   	i = 0;
-    while(s[i])
-    {
-        write(1, &s[i], 1);
-                i++;
-    }
 }
 
 int     ft_strcmp(const char *s1, const char *s2)

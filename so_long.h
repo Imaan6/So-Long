@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 22:20:51 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/10 23:50:59 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:40:42 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include <unistd.h>
+# include <stdarg.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -41,10 +42,10 @@ typedef struct var
 	int		py;
 	int 	is_ver;
 	int		is_hor;
+	int		moves;
 }	t_var;
 
 void	print_error(char *str);
-void    ft_putstr(char *s);
 int     ft_strcmp(const char *s1, const char *s2);
 char	*ft_substr(char const *s, unsigned int start, int len);
 int     ft_strlen(char *s);
@@ -56,5 +57,13 @@ char	**ft_split(char const *s, char c);
 void	print_free_exit(char *str, t_var *var);
 void	check_map(t_var *var);
 int		exit_plan(t_var *var);
+int		ft_printf(const char *str, ...);
+int		ft_putchar(char c);
+int		ft_putstr(char *str);
+int		ft_putnbr(int nb);
+int		ft_putposnbr(unsigned int n);
+int		ft_putaddress(unsigned long nb);
+int		ft_puthexalow(unsigned int nb);
+int		ft_puthexaup(unsigned int nb);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 02:32:01 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/11 00:05:50 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:56:12 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	rendering_map(t_var *var)
 
 void	move_it(t_var *var)
 {
-	printf("%d \n", var->c);
 	if(var->map[var->py + var->is_ver][var->px + var->is_hor] == '0' ||
 	 var->map[var->py + var->is_ver][var->px + var->is_hor] == 'C')
 	{
@@ -85,6 +84,7 @@ void	move_it(t_var *var)
 		var->px += var->is_hor;
 		var->map[var->py][var->px] = 'P';
 		rendering_map(var);
+		ft_printf("%d \n", var->moves++);
 	}
 	else if(var->map[var->py + var->is_ver][var->px + var->is_hor] == 'E' && var->c == 0)
 	{
@@ -94,6 +94,7 @@ void	move_it(t_var *var)
 		var->map[var->py][var->px] = 'P';
 		rendering_map(var);
 		exit_plan(var);
+		ft_printf("%d \n", var->moves++);
 	}
 }
 
@@ -138,6 +139,7 @@ int main(int ac, char **av)
 {
 	t_var *var;
 	var = malloc(sizeof(t_var));
+	var->moves = 0;
 	if (ac != 2)
 		print_error("Usage: ./so_long + <file.ber>");
 	else if (ft_strcmp(".ber", get_extension(av[1])))
