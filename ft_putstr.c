@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 18:34:22 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/11 01:38:20 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 02:53:22 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_putstr(char *str)
 	}
 	return (i);
 }
+
 int	len_p(unsigned int nb)
 {
 	int	i;

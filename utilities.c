@@ -6,7 +6,7 @@
 /*   By: iel-moha <iel-moha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 23:54:00 by iel-moha          #+#    #+#             */
-/*   Updated: 2022/08/11 01:41:06 by iel-moha         ###   ########.fr       */
+/*   Updated: 2022/08/11 07:56:52 by iel-moha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,26 @@ void	print_error(char *str)
 	ft_putstr("Error\n");
 	ft_putstr(str);
 	ft_putstr("\n");
-	//system("leaks a.out");
 	exit(1);
 }
 
-int     ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-        int  i;
+	int	i;
 
-        i = 0;
-        while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-                i++;
-        return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 char	*get_extension(char *str)
 {
-	int p;
-	int i;
+	int	p;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '.')
 			p = i;
@@ -46,7 +45,7 @@ char	*get_extension(char *str)
 	return (str + p);
 }
 
-void print_free_exit(char *str, t_var *var)
+void	print_free_exit(char *str, t_var *var)
 {
 	if (var->map)
 		free(var->map);
